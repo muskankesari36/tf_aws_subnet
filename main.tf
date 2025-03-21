@@ -1,10 +1,4 @@
-provider "aws" {
-  region = var.aws_region
-}
-
-
-
-data "aws_vpc" "dev_vpc" {
+data "aws_vpc" "this" {
   filter {
     name   = "tag:Name"
     values = [var.subnet_config.vpc_name]
@@ -12,7 +6,7 @@ data "aws_vpc" "dev_vpc" {
 }
 
 locals {
-  vpc_id = data.aws_vpc.dev_vpc.id
+  vpc_id = data.aws_vpc.this.id
 }
 
 resource "aws_subnet" "this" {
