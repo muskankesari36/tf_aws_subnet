@@ -1,9 +1,9 @@
 output "subnet_id" {
-  value = aws_subnet.this.id
+  value = { for k, v in aws_subnet.this : v.tags["Name"] => v.id }
 
 }
 
 
 output "cidr_block" {
-  value = aws_subnet.this.cidr_block
+  value = { for k,v in aws_subnet.this : v.tags["Name"] => v.cidr_block }
 }

@@ -3,13 +3,27 @@ variable "aws_region" {
   type        = string
 }
 
+variable "subnet_config_defaults" {
+
+  type = object({
+    map_public_ip_on_launch = bool
+  })
+
+  default = {
+    map_public_ip_on_launch = false
+  }
+
+}
 
 variable "subnet_config" {
 
   type = object({
-    subnet_name = string
     vpc_name    = string
-    cidr_block  = string
+    map_public_ip_on_launch = optional(bool)
+    az_cidr_map = map(object({
+      cidr_block = string
+    custom_name = string
+    }))
   })
 
 }
