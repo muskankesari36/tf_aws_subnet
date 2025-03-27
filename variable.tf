@@ -15,10 +15,14 @@ variable "subnet_config_defaults" {
 
 }
 
+variable "vpc_id" {
+    type = string
+  
+}
+
 variable "subnet_config" {
 
   type = object({
-    vpc_name    = string
     map_public_ip_on_launch = optional(bool)
     az_cidr_map = map(object({
       cidr_block = string

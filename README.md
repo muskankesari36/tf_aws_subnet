@@ -1,4 +1,4 @@
-# tf_aws_vpc
+# tf_aws_subnet
 Creating Central Terraform Module for AWS subnet
 
 # Overview
@@ -49,4 +49,30 @@ The required variable values to be passed to the module are defined in the varia
 
 
 ### Example use
+
+From an active core_module reference this subnet module, passing required variable values;
+
+```bash
+
+# within the core_module, declare remote module
+
+module "web_subnets" {
+  
+  ### REMOTE, the path is relative on the local machine, when checked out of git repo
+  source = "../tf_aws_subnet"
+  depends_on = [ module.libryo_vpc ] # likely need to ensure these are available
+
+  #common settings
+  aws_region = var.aws_region
+  #existing
+  vpc_id = module.libryo_vpc.vpc_id
+  #setting subnet configuration
+  subnet_config = {
+    az_cidr_map = var.subnet_config.az_cidr_map_ranges.web_subnet_cidrs
+  }
+ 
+
+}
+
+```
 
