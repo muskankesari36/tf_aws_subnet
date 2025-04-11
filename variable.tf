@@ -32,6 +32,15 @@ variable "subnet_config" {
 
 }
 
+variable "az_name_map" {
+  type = map(string)
+  description = "Map from custom AZ keys to actual AZ names"
+  default = {
+    "az-a" = "us-west-2a"
+    "az-b" = "us-west-2b"
+  }
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)

@@ -18,7 +18,7 @@ resource "aws_subnet" "this" {
   vpc_id                  = var.vpc_id
   cidr_block              = each.value.cidr_block
   map_public_ip_on_launch = coalesce(var.subnet_config.map_public_ip_on_launch, var.subnet_config_defaults.map_public_ip_on_launch)
-  availability_zone       = each.key
+  availability_zone       = var.az_name_map[each.key]
 
   tags = merge({
     Name = each.value.custom_name
