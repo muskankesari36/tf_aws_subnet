@@ -5,7 +5,7 @@ output "subnet_id" {
 
 output "subnet_az_map" {
   value = {
-    for k, v in aws_subnet.this : v.tags["Name"] => v.availability_zone
+    for k, v in aws_subnet.this : v.id => v.availability_zone
   }
 }
 
